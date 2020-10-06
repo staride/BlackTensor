@@ -18,7 +18,7 @@ public class WishItem {
     private Long listNo;
 
     @ManyToOne
-    @JoinColumn(name = "memberNo")
+    @JoinColumn(name = "memberNo", nullable = false)
     private Member memberNo;
 
     @Column(nullable = false)
