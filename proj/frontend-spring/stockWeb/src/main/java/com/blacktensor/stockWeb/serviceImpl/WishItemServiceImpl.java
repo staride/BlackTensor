@@ -44,7 +44,12 @@ public class WishItemServiceImpl implements WishItemService {
         List<Member> list = memberRepo.findByApiId(apiId);
 
         if(list.size() == 1){
-            item.setMember(list.get(0));
+            List<WishItem> removeItem = repo.findByStockCode(item.getStockCode());
+            if(removeItem != null && removeItem.size() == 1){
+                repo.delete(removeItem.get(0));
+            }else{
+                throw new Exception("is not exist item. Stock code : " + item.getStockCode());
+            }
             repo.delete(item);
         }else{
             throw new Exception("this Id not exist. Id : " + apiId);
