@@ -25,6 +25,29 @@ public class MemberController {
     @Autowired
     private MemberService service;
 
+    @PostMapping("/login")
+    public ResponseEntity<String> login(String id, String password){
+
+        log.debug("information - id : " + id + ", password : " + password);
+
+        try {
+
+            if(RegexUtil.isEmail(id) && StringUtil.isEmptyString(password) && password.length() >= 6){
+                if(service.login(id, password)){
+                    return new ResponseEntity<String>("Login OK", HttpStatus.OK);
+                }else{
+                    return new ResponseEntity<String>("Login Fail", HttpStatus.OK);
+                }
+            }
+
+        } catch (Exception e){
+            log.debug(e.getMessage());
+            return new ResponseEntity<String>("login Fail", HttpStatus.OK);
+        }
+
+        return new ResponseEntity<String>("Check Login Information", HttpStatus.BAD_REQUEST);
+    }
+
     @PostMapping("/signup")
     public ResponseEntity<String> signup (@Validated @RequestBody Member member){
 
