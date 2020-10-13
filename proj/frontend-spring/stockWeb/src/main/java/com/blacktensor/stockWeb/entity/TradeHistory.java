@@ -22,7 +22,7 @@ public class TradeHistory {
 
     @ManyToOne
     @JoinColumn(name = "memberNo", nullable = false)
-    private Member memberNo;
+    private Member member;
 
     @Column(nullable = false)
     private String stockName;
@@ -37,7 +37,13 @@ public class TradeHistory {
     private String buyPrice;
 
     @Column(nullable = true)
+    private String buyCount;
+
+    @Column(nullable = true)
     private String sellPrice;
+
+    @Column(nullable = true)
+    private String sellCount;
 
     @Column(nullable = true)
     private String diffPrice;
@@ -46,6 +52,10 @@ public class TradeHistory {
     private String yield;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @Column(nullable = false, columnDefinition = "timestamp default now()", name = "regdate")
-    private Date regDate;
+    @Column(nullable = false, columnDefinition = "timestamp default now()", name = "historyDate")
+    private Date historyDate;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Column(nullable = false, name = "eventDate")
+    private Date eventDate;
 }
