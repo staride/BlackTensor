@@ -8,3 +8,15 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+    app:
+      sample:
+        message:
+          AuditingFilter: DEBUG
+          SecurityChecker: DEBUG
+          MessageService: DEBUG

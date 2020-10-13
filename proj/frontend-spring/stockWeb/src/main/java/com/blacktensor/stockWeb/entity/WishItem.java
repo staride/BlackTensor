@@ -19,7 +19,7 @@ public class WishItem {
 
     @ManyToOne
     @JoinColumn(name = "memberNo", nullable = false)
-    private Member memberNo;
+    private Member member;
 
     @Column(nullable = false)
     private String stockName;
