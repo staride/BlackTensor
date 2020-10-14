@@ -32,7 +32,7 @@ public class MemberController {
 
         try {
 
-            if(RegexUtil.isEmail(id) && StringUtil.isEmptyString(password) && password.length() >= 6){
+            if(ValidateUtil.validateLoginInfo(id, password)){
                 if(service.login(id, password)){
                     return new ResponseEntity<String>("Login OK", HttpStatus.OK);
                 }else{

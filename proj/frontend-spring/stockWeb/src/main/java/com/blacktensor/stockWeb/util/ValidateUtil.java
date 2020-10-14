@@ -5,6 +5,17 @@ import com.blacktensor.stockWeb.entity.TradeHistory;
 import com.blacktensor.stockWeb.entity.WishItem;
 
 public class ValidateUtil {
+
+    public static boolean validateLoginInfo(String id, String password){
+        boolean result = false;
+
+        if(RegexUtil.isEmail(id) && StringUtil.isNotEmptyString(password) && password.length() >= 6){
+            result = true;
+        }
+
+        return result;
+    }
+
     public static boolean validateSignupInfo(Member member){
         boolean result = false;
 
@@ -20,7 +31,7 @@ public class ValidateUtil {
 
         if(history != null && StringUtil.isNotEmptyString(history.getStockCode()) && StringUtil.isNotEmptyString(history.getStockName())
            && StringUtil.isNotEmptyString(history.getBuyPrice()) && StringUtil.isNotEmptyString(history.getBuyCount())
-           && StringUtil.isNotEmptyString(history.getEventDate().toString()) && history.getMember() != null
+           && history.getEventDate() != null && StringUtil.isNotEmptyString(history.getEventDate().toString()) && history.getMember() != null
            && StringUtil.isNotEmptyString(history.getMember().getApiId())){
             result = true;
         }
@@ -33,7 +44,7 @@ public class ValidateUtil {
 
         if(history != null && StringUtil.isNotEmptyString(history.getStockCode()) && StringUtil.isNotEmptyString(history.getStockName())
                 && StringUtil.isNotEmptyString(history.getSellPrice()) && StringUtil.isNotEmptyString(history.getSellCount())
-                && StringUtil.isNotEmptyString(history.getEventDate().toString()) && history.getMember() != null
+                && history.getEventDate() != null && StringUtil.isNotEmptyString(history.getEventDate().toString()) && history.getMember() != null
                 && StringUtil.isNotEmptyString(history.getMember().getApiId())){
             result = true;
         }
