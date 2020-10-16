@@ -129,6 +129,6 @@ public class MemberController {
             return new ResponseEntity<String>("find Api Id Fail", HttpStatus.OK);
         }
 
-        return new ResponseEntity<String>("Check App Id infomation", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<String>("Check App Id information", HttpStatus.BAD_REQUEST);
     }
 }
