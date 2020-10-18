@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -26,7 +27,10 @@ public class MemberController {
     private MemberService service;
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(String id, String password){
+    public ResponseEntity<String> login(@RequestBody HashMap<String, String> values){
+
+        String id = values.get("id");
+        String password = values.get("password");
 
         log.debug("information - id : " + id + ", password : " + password);
 
@@ -68,7 +72,7 @@ public class MemberController {
         return new ResponseEntity<String>("Check SignUp Information", HttpStatus.BAD_REQUEST);
     }
 
-    @GetMapping("/checkmail/{mail}")
+    @GetMapping("/check/{mail}")
     public ResponseEntity<String> checkMail(@PathVariable String mail){
 
         try{
