@@ -28,7 +28,7 @@ public class WishItemController {
 
         try {
 
-            if(ValidateUtil.validateWishItem(item)){
+            if(ValidateUtil.validateWishItemInfo(item)){
                 service.addWishItem(item);
                 return new ResponseEntity<String>("WishItem create Success", HttpStatus.OK);
             }
@@ -48,7 +48,7 @@ public class WishItemController {
 
         try {
 
-            if(ValidateUtil.validateWishItem(item)){
+            if(ValidateUtil.validateWishItemInfo(item)){
                 service.removeWishItem(item);
                 return new ResponseEntity<String>("WishItem remove Success", HttpStatus.OK);
             }

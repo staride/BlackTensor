@@ -1,6 +1,7 @@
 package com.blacktensor.stockWeb.controller;
 
 import com.blacktensor.stockWeb.entity.Member;
+import com.blacktensor.stockWeb.entity.MyPage;
 import com.blacktensor.stockWeb.service.MemberService;
 import com.blacktensor.stockWeb.util.RegexUtil;
 import com.blacktensor.stockWeb.util.StringUtil;
@@ -133,6 +134,74 @@ public class MemberController {
             return new ResponseEntity<String>("find Api Id Fail", HttpStatus.OK);
         }
 
-        return new ResponseEntity<String>("Check App Id information", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<String>("Check Api Id information", HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping("/getInfo/{mail}")
+    public ResponseEntity<Member> getMemberInfo(@PathVariable String mail){
+
+        log.debug("information - mail : " + mail);
+        Member member = null;
+
+        try {
+            if(RegexUtil.isEmail(mail)){
+                member = service.getMemberInfo(mail);
+
+                if(member != null){
+                    member.setMemberNo(Long.valueOf(0));
+                    member.setPassword("");
+                }
+
+                return new ResponseEntity<Member>(member, HttpStatus.OK);
+            }
+        } catch (Exception e){
+            log.debug("Check email");
+            return new ResponseEntity<Member>(member, HttpStatus.OK);
+        }
+
+        return new ResponseEntity<Member>(member, HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping("/mypage/{mail}")
+    public ResponseEntity<MyPage> getMyPageInfo(@PathVariable String mail){
+
+        log.debug("information - mail : " + mail);
+        MyPage pageInfo = null;
+
+        try {
+
+            if(RegexUtil.isEmail(mail)){
+                pageInfo = service.getMyPage(mail);
+                if(pageInfo != null){
+                    pageInfo.setMember(null);
+                    pageInfo.setPageNo(Long.valueOf(0));
+                }
+
+                return new ResponseEntity<MyPage>(pageInfo, HttpStatus.OK);
+            }
+
+        } catch (Exception e){
+            log.debug("Check email");
+            return new ResponseEntity<MyPage>(pageInfo, HttpStatus.OK);
+        }
+
+        return new ResponseEntity<MyPage>(pageInfo, HttpStatus.BAD_REQUEST);
+    }
+
+    @PutMapping("/mypage/{mail}")
+    public ResponseEntity<String> updateMyPageInfo(@PathVariable String mail, @Validated @RequestBody MyPage mypage){
+        log.debug("information - mail : " + mail);
+
+        try {
+            if(RegexUtil.isEmail(mail)){
+                service.updateMyPageInfo(mail, mypage);
+                return new ResponseEntity<String>("Update ok", HttpStatus.OK);
+            }
+        }catch (Exception e){
+            log.debug("Check email");
+            return new ResponseEntity<String>("Update Fail", HttpStatus.OK);
+        }
+
+        return new ResponseEntity<String>("check my page data", HttpStatus.OK);
     }
 }

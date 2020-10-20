@@ -1,6 +1,7 @@
 package com.blacktensor.stockWeb.util;
 
 import com.blacktensor.stockWeb.entity.Member;
+import com.blacktensor.stockWeb.entity.MyPage;
 import com.blacktensor.stockWeb.entity.TradeHistory;
 import com.blacktensor.stockWeb.entity.WishItem;
 
@@ -52,7 +53,7 @@ public class ValidateUtil {
         return result;
     }
 
-    public static boolean validateWishItem(WishItem item){
+    public static boolean validateWishItemInfo(WishItem item){
         boolean result = false;
 
         if(item != null && StringUtil.isNotEmptyString(item.getStockCode()) && StringUtil.isNotEmptyString(item.getStockName())
