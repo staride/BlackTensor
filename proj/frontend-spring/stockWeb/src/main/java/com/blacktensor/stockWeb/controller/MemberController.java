@@ -111,10 +111,10 @@ public class MemberController {
             }
         } catch (Exception e) {
             log.debug("Check Update AppId Info");
-            return new ResponseEntity<String>("Update ApiId Fail", HttpStatus.OK);
+            return new ResponseEntity<String>("Update Api Id Fail", HttpStatus.OK);
         }
 
-        return new ResponseEntity<String>("Check Update ApiId Information", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<String>("Check Update Api Id Information", HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/check/apiid/{apiid}")
